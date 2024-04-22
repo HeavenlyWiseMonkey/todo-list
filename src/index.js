@@ -1,5 +1,19 @@
 const ToDo = function (title, description, dueDate, priority, project) {
-    return {title, description, dueDate, priority, project};
+    return {title, description, dueDate, priority};
+}
+
+const Project = function (name) {
+  let toDos = [];
+
+  const add = (newToDo) => {
+    toDos.push(newToDo);
+    if (storageAvailable("localStorage")) {
+      localStorage.setItem(name, JSON.stringify(toDos));
+    }
+
+  }
+
+  return {name, toDos, add}
 }
 
 function storageAvailable(type) {
@@ -29,31 +43,26 @@ function storageAvailable(type) {
   }
 }
 
-function add() {
-    title = prompt('Title');
-    description = prompt('Description');
-    dueDate = prompt('Due Date');
-    priority = prompt('Priority');
-    project = prompt('Project');
-
-    newItem = ToDo(title, description, dueDate, priority, project);
-
-
-    if (storageAvailable("localStorage")) {
-        localStorage.setItem(newTitle, JSON.stringify(newItem));
-    }
-
-    display();
-}
-
 function display() {
     if (localStorage.length) {
         console.log(localStorage);
     }
 }
 
-// homework = ToDo('finish homework','very difficult', '2024-04-31', 'high', 'school');
+function question() {
+  title = prompt('Title');
+  description = prompt('Description');
+  dueDate = prompt('Due Date');
+  priority = prompt('Priority');
+
+  newToDo = ToDo(title, description, dueDate, priority);
+  return newToDo;
+}
+
+// homework = ToDo('finish homework','very difficult', '2024-04-31', 'high');
+
+let school = Project('School');
 
 display();
-add();
-
+school.add(question());
+display();
