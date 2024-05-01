@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #702963;
+    font-size: 2rem;
+    color: #fff;
+    grid-row: 1;
+    grid-column: 1 / 6;
+    padding: 20px;
+}
+
+nav {
+    background-color: #eee;
+    grid-row: 2 / 11;
+    grid-column: 1;
+    padding: 10px;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    height: 100vh;
+    width: 100vw;
+}
+
+.content {
+    grid-row: 2 / 11;
+    grid-column: 2 / 6;
+}
+
+ul {
+    list-style-type: none;
+    font-size: 1.5rem;
+}
+
+li {
+    margin: 1rem 0;
+}
+
+.toDoBox {
+    display: flex;
+    justify-content: space-around;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

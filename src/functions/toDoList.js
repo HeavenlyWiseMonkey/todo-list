@@ -3,7 +3,13 @@ function ToDo (title, description, dueDate, priority) {
   this.description = description;
   this.dueDate = dueDate;
   this.priority = priority;
+  this.project;
   this.status = false;
+}
+
+function add(newToDo) {
+  newToDo.project = name;
+  this.toDoArray.push(newToDo);
 }
 
 function Project(name) {
@@ -56,4 +62,4 @@ function addToLocalStorage(project) {
   localStorage.setItem(project.name, JSON.stringify(project.toDoArray));
 }
 
-export {Project, display, question, addToLocalStorage};
+export {Project, display, question, addToLocalStorage, ToDo};
