@@ -32,6 +32,7 @@ nav {
 .content {
     grid-row: 2 / 11;
     grid-column: 2 / 6;
+    padding: 1.2rem;
 }
 
 ul {
@@ -41,11 +42,6 @@ ul {
 
 li {
     margin: 1rem 0;
-}
-
-.toDoBox {
-    display: flex;
-    justify-content: space-around;
 }
 
 form {
@@ -58,4 +54,16 @@ dialog {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.toDoBox {
+    display: flex;
+    justify-content: space-around;
+    background-color: #eee;
+    padding: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+
+li {
+    cursor: pointer;
 }

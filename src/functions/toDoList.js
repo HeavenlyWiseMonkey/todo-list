@@ -1,9 +1,9 @@
-function ToDo (title, description, dueDate, priority) {
+function ToDo (title, description, dueDate, priority, project) {
   this.title = title;
   this.description = description;
   this.dueDate = dueDate;
   this.priority = priority;
-  this.project;
+  this.project = project;
   this.status = false;
 }
 
