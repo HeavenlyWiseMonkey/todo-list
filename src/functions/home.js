@@ -1,4 +1,6 @@
 import {Project, display, question, addToLocalStorage, ToDo} from './toDoList';
+import {format} from 'date-fns';
+
 const content = document.querySelector('.content');
 
 const clearButton = document.createElement('button');
@@ -35,31 +37,75 @@ function home() {
     const titleInput = document.createElement('input');
     const descriptionInput = document.createElement('input');
     const dueDateInput = document.createElement('input');
-    const priorityInput = document.createElement('input');
+
+    const priorityInput = document.createElement('select');
+    const lowPriority = document.createElement('option');
+    const mediumPriority = document.createElement('option');
+    const highPriority = document.createElement('option');
+
     const projectInput = document.createElement('input');
     const submitButton = document.createElement('button');
 
+    const titleLabel = document.createElement('label');
+    const descriptionLabel = document.createElement('label');
+    const dueDateLabel = document.createElement('label');
+    const priorityLabel = document.createElement('label');
+    const projectLabel = document.createElement('label');
 
     titleInput.setAttribute('type', 'text');
     descriptionInput.setAttribute('type', 'text');
-    dueDateInput.setAttribute('type', 'text');
-    priorityInput.setAttribute('type', 'text');
-    projectInput.setAttribute('type', 'input');
-    submitButton.setAttribute('type', 'button');
+    dueDateInput.setAttribute('type', 'date');
+    projectInput.setAttribute('type', 'text');
+    submitButton.setAttribute('type', 'submit');
 
-    titleInput.setAttribute('placeholder', 'Title');
-    descriptionInput.setAttribute('placeholder', 'Description');
-    dueDateInput.setAttribute('placeholder', 'Due Date');
-    priorityInput.setAttribute('placeholder', 'Priority');
-    projectInput.setAttribute('placeholder', 'Project');
-    submitButton.classList.add('submitButton');
+    titleInput.setAttribute('id', 'title');
+    descriptionInput.setAttribute('id', 'description');
+    dueDateInput.setAttribute('id', 'dueDate');
+    priorityInput.setAttribute('id', 'priority');
+    projectInput.setAttribute('id', 'project');
+
+    titleLabel.setAttribute('for', 'title');
+    descriptionLabel.setAttribute('for', 'description');
+    dueDateLabel.setAttribute('for', 'dueDate');
+    priorityLabel.setAttribute('for', 'priority');
+    projectLabel.setAttribute('for', 'project');
+
+    titleLabel.textContent = 'Title';
+    descriptionLabel.textContent ='Description';
+    dueDateLabel.textContent = 'Due Date';
+    priorityLabel.textContent = 'Priority';
+    projectLabel.textContent = 'Project';
     submitButton.textContent = 'Submit';
+    lowPriority.textContent = 'Low';
+    mediumPriority.textContent = 'Medium';
+    highPriority.textContent = 'High';
 
-    addTaskForm.appendChild(titleInput);
-    addTaskForm.appendChild(descriptionInput);
-    addTaskForm.appendChild(dueDateInput);
-    addTaskForm.appendChild(priorityInput);
-    addTaskForm.appendChild(projectInput);
+    lowPriority.setAttribute('value', 'Low');
+    mediumPriority.setAttribute('value', 'Medium');
+    highPriority.setAttribute('value', 'High');
+
+    submitButton.classList.add('submitButton');
+
+    titleInput.required = true;
+    descriptionInput.required = true;
+    dueDateInput.required = true;
+    priorityInput.required = true;
+    projectInput.required = true;
+
+    priorityInput.appendChild(lowPriority);
+    priorityInput.appendChild(mediumPriority);
+    priorityInput.appendChild(highPriority);
+
+    const labels = [titleLabel, descriptionLabel, dueDateLabel, priorityLabel, projectLabel];
+    const inputs = [titleInput, descriptionInput, dueDateInput, priorityInput, projectInput];
+
+    for (let i=0; i<labels.length; i++) {
+        let group = document.createElement('div');
+        group.appendChild(labels[i]);
+        group.appendChild(inputs[i]);
+        addTaskForm.appendChild(group);
+    }
+
     addTaskForm.appendChild(submitButton);
     addTaskDialog.appendChild(addTaskForm);
     content.appendChild(addTaskDialog);
@@ -68,29 +114,74 @@ function home() {
     const editTitleInput = document.createElement('input');
     const editDescriptionInput = document.createElement('input');
     const editDueDateInput = document.createElement('input');
-    const editPriorityInput = document.createElement('input');
+
+    const editPriorityInput = document.createElement('select');
+    const editLowPriority = document.createElement('option');
+    const editMediumPriority = document.createElement('option');
+    const editHighPriority = document.createElement('option');
+
     const editProjectInput = document.createElement('input');
     const confirmChangesButton = document.createElement('button');
 
+    const editTitleLabel = document.createElement('label');
+    const editDescriptionLabel = document.createElement('label');
+    const editDueDateLabel = document.createElement('label');
+    const editPriorityLabel = document.createElement('label');
+    const editProjectLabel = document.createElement('label');
+
     editTitleInput.setAttribute('type', 'text');
     editDescriptionInput.setAttribute('type', 'text');
-    editDueDateInput.setAttribute('type', 'text');
+    editDueDateInput.setAttribute('type', 'date');
     editPriorityInput.setAttribute('type', 'text');
     editProjectInput.setAttribute('type', 'text');
-    confirmChangesButton.setAttribute('type', 'button');
+    confirmChangesButton.setAttribute('type', 'submit');
 
-    editTitleInput.setAttribute('placeholder', 'Title');
-    editDescriptionInput.setAttribute('placeholder', 'Description');
-    editDueDateInput.setAttribute('placeholder', 'Due Date');
-    editPriorityInput.setAttribute('placeholder', 'Priority');
-    editProjectInput.setAttribute('placeholder', 'Project');
+    editTitleInput.setAttribute('id', 'title');
+    editDescriptionInput.setAttribute('id', 'description');
+    editDueDateInput.setAttribute('id', 'dueDate');
+    editPriorityInput.setAttribute('id', 'priority');
+    editProjectInput.setAttribute('id', 'project');
+
+    editTitleLabel.setAttribute('for', 'title');
+    editDescriptionLabel.setAttribute('for', 'description');
+    editDueDateLabel.setAttribute('for', 'dueDate');
+    editPriorityLabel.setAttribute('for', 'priority');
+    editProjectLabel.setAttribute('for', 'project');
+
+    editTitleLabel.textContent = 'Title';
+    editDescriptionLabel.textContent = 'Description';
+    editDueDateLabel.textContent = 'Due Date';
+    editPriorityLabel.textContent = 'Priority';
+    editProjectLabel.textContent = 'Project';
     confirmChangesButton.textContent = 'Confirm Changes';
+    editLowPriority.textContent = 'Low';
+    editMediumPriority.textContent = 'Medium';
+    editHighPriority.textContent = 'High';
 
-    editTaskForm.appendChild(editTitleInput);
-    editTaskForm.appendChild(editDescriptionInput);
-    editTaskForm.appendChild(editDueDateInput);
-    editTaskForm.appendChild(editPriorityInput);
-    editTaskForm.appendChild(editProjectInput);
+    editLowPriority.setAttribute('value', 'Low');
+    editMediumPriority.setAttribute('value', 'Medium');
+    editHighPriority.setAttribute('value', 'High');
+
+    editTitleInput.required = true;
+    editDescriptionInput.required = true;
+    editDueDateInput.required = true;
+    editPriorityInput.required = true;
+    editProjectInput.required = true;
+
+    editPriorityInput.appendChild(editLowPriority);
+    editPriorityInput.appendChild(editMediumPriority);
+    editPriorityInput.appendChild(editHighPriority);
+
+    const editLabels = [editTitleLabel, editDescriptionLabel, editDueDateLabel, editPriorityLabel, editProjectLabel];
+    const editInputs = [editTitleInput, editDescriptionInput, editDueDateInput, editPriorityInput, editProjectInput];
+
+    for (let i=0; i<labels.length; i++) {
+        let group = document.createElement('div');
+        group.appendChild(editLabels[i]);
+        group.appendChild(editInputs[i]);
+        editTaskForm.appendChild(group);
+    }
+
     editTaskForm.appendChild(confirmChangesButton);
     editTaskDialog.appendChild(editTaskForm);
 
@@ -115,13 +206,15 @@ function home() {
         }
     });
 
-    submitButton.addEventListener('click', () => {
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault();
         let newTask = new ToDo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, projectInput.value);
         submitNewTask(newTask);
         addTaskDialog.close();
     });
     
-    confirmChangesButton.addEventListener('click', () => {
+    confirmChangesButton.addEventListener('click', (e) => {
+        e.preventDefault();
         let editedTask = new ToDo(editTitleInput.value, editDescriptionInput.value, editDueDateInput.value, editPriorityInput.value, editProjectInput.value);
         let values = Object.values(editedTask);
         let box = document.querySelector(`[data-project='${editTaskForm.dataset.project}'][data-index='${editTaskForm.dataset.index}']`);
@@ -150,12 +243,14 @@ function makeToDoBox(ToDo, index) {
     const priorityElement = document.createElement('p');
     const statusElement = document.createElement('input');
     const editElement = document.createElement('button');
+    const deleteElement = document.createElement('button');
 
     titleElement.textContent = ToDo.title;
     descriptionElement.textContent = ToDo.description;
-    dueDateElement.textContent = ToDo.dueDate;
+    dueDateElement.textContent = format(new Date(ToDo.dueDate), 'MM/dd/yyyy');
     priorityElement.textContent = ToDo.priority;
     editElement.textContent = 'Edit';
+    deleteElement.textContent = 'Delete';
 
     titleElement.classList.add('title');
     descriptionElement.classList.add('description');
@@ -163,6 +258,7 @@ function makeToDoBox(ToDo, index) {
     priorityElement.classList.add('priority');
     statusElement.classList.add('statusElement');
     editElement.classList.add('editElement');
+    deleteElement.classList.add('deleteElement');
     box.classList.add('toDoBox');
 
     statusElement.type = 'checkbox';
@@ -185,12 +281,26 @@ function makeToDoBox(ToDo, index) {
         editTaskDialog.showModal();
     });
 
+    deleteElement.addEventListener('click', () => {
+        const ToDoList = document.querySelector('.ToDoList');
+        const boxes = ToDoList.childNodes;
+        const currentBox = deleteElement.parentElement;
+        console.log(currentBox.dataset.index);
+        console.log(boxes.length);
+        for (let i=currentBox.dataset.index; i<boxes.length; i++) {
+            boxes[i].dataset.index = i-1;
+        }
+        deleteTask(box.dataset.project, box.dataset.index);
+        currentBox.remove();
+    });
+
     box.appendChild(statusElement);
     box.appendChild(titleElement);
     box.appendChild(descriptionElement);
     box.appendChild(dueDateElement);
     box.appendChild(priorityElement);
     box.appendChild(editElement);
+    box.appendChild(deleteElement);
 
     ToDoList.appendChild(box);
 }
@@ -210,10 +320,21 @@ function submitNewTask(newToDo) {
     }
 }
 
-function editTask(editedTask, currentProject, index) {
+function editTask(task, currentProject, index) {
     let projectState = JSON.parse(localStorage.getItem(currentProject));
-    projectState[index] = editedTask;
+    projectState[index] = task;
     localStorage.setItem(currentProject, JSON.stringify(projectState));
+}
+
+function deleteTask(currentProject, index) {
+    let changedProject = JSON.parse(localStorage.getItem(currentProject));
+    if (changedProject.length === 1) {
+        localStorage.removeItem(currentProject);
+    }
+    else {
+        changedProject.splice(index, 1);
+        localStorage.setItem(currentProject, JSON.stringify(changedProject));
+    }
 }
 
 export default home;
