@@ -14,10 +14,22 @@ import home from './functions/home';
 //     addToLocalStorage(newProject);
 // });
 
-const homeButton = document.querySelector('.home');
-const todayButton = document.querySelector('.today');
-const weekButton = document.querySelector('.week');
+const homeElement = document.querySelector('.home');
+const todayElement = document.querySelector('.today');
+const weekElement = document.querySelector('.week');
+const projectsElement = document.querySelector('.projects');
 
-homeButton.addEventListener('click', () => {
+homeElement.addEventListener('click', () => {
     home();
 });
+
+const projectList = document.createElement('ul');
+
+for (let i=0; i<localStorage.length; i++) {
+    const projectName = document.createElement('li');
+    projectName.classList.add('projectName');
+    projectName.textContent = localStorage.key(i);
+    projectList.appendChild(projectName);
+}
+
+projectsElement.appendChild(projectList);
