@@ -1,6 +1,10 @@
 import * as css from './index.css';
-import {Project, display, question, addToLocalStorage} from './functions/toDoList';
+import makeAddTaskButton from './functions/makeAddTaskButton';
+import makeAddTaskDialog from './functions/makeAddTaskDialog';
+import makeEditTaskDialog from './functions/makeEditTaskDialog';
 import home from './functions/home';
+import today from './functions/today';
+import week from './functions/week';
 
 // let newProjectName = prompt("What do you want to name your project?");
 
@@ -23,6 +27,14 @@ homeElement.addEventListener('click', () => {
     home();
 });
 
+todayElement.addEventListener('click', () => {
+    today();
+});
+
+weekElement.addEventListener('click', () => {
+    week();
+});
+
 const projectList = document.createElement('ul');
 
 for (let i=0; i<localStorage.length; i++) {
@@ -33,3 +45,7 @@ for (let i=0; i<localStorage.length; i++) {
 }
 
 projectsElement.appendChild(projectList);
+
+makeAddTaskDialog();
+makeEditTaskDialog();
+makeAddTaskButton();
