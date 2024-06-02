@@ -1,4 +1,5 @@
 import {ToDo} from './toDoList';
+import {format} from 'date-fns';
 
 function makeEditTaskDialog() {
     const content = document.querySelector('.content');
@@ -102,8 +103,12 @@ function makeEditTaskDialog() {
         let box = document.querySelector(`[data-project='${editTaskForm.dataset.project}'][data-index='${editTaskForm.dataset.index}']`);
         let editInputs = box.childNodes;
         editTask(editedTask, editTaskForm.dataset.project, editTaskForm.dataset.index);
-        for (let i=1; i<editInputs.length-1; i++) {
+        for (let i=1; i<editInputs.length-2; i++) {
             editInputs[i].textContent = values[i-1];
+            if (i === 3) {
+                let dateData = values[i-1].split('-');
+                editInputs[i].textContent = format(new Date(Number(dateData[0]), Number(dateData[1])-1, Number(dateData[2])), 'MM/dd/yyyy');
+            }
         }
         editTaskDialog.close();
     });

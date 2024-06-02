@@ -64,6 +64,10 @@ dialog {
     margin-bottom: 0.8rem;
 }
 
-li {
+.home, .today, .week, .projectName {
     cursor: pointer;
+}
+
+.selected {
+    font-weight: bolder;
 }

@@ -1,20 +1,15 @@
-import makeToDoBox from './makeToDoBox'
-
+import makeToDoBox from './makeToDoBox';
+import clearSelected from './clearSelected';
 
 const content = document.querySelector('.content');
 
-const clearButton = document.createElement('button');
-clearButton.textContent = 'Clear';
-clearButton.addEventListener('click', () => {
-    localStorage.clear();
-});
-
-content.appendChild(clearButton);
-
 function home() {
     const ToDoList = document.querySelector('.ToDoList');
+    const dueDateInputs = document.querySelectorAll('#dueDate');
+    const projectInputs = document.querySelectorAll('#project');
+    const homeText = document.querySelector('.home');
     ToDoList.textContent = '';
-    // Show localStorage toDos
+
     for (const item in localStorage) {
         if (localStorage.hasOwnProperty(item)) {
             let obj = JSON.parse(localStorage.getItem(item));
@@ -24,25 +19,17 @@ function home() {
         }
     }
 
-    // Make dialog and inputs
+    for (let i=0; i<dueDateInputs.length; i++) {
+        dueDateInputs[i].disabled = false;
+        dueDateInputs[i].max = '3024-01-01';
+    }
 
-    
-    // Add Event Listeners
+    for (let i=0; i<projectInputs.length; i++) {
+        projectInputs[i].disabled = false;
+    }
 
-
-    
-
-
-    
-
-
-
+    clearSelected();
+    homeText.classList.add('selected');
 }
-
-
-
-
-
-
 
 export default home;

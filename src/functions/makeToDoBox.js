@@ -1,4 +1,3 @@
-import {ToDo} from './toDoList';
 import {format} from 'date-fns';
 
 function makeToDoBox(ToDo, index) {

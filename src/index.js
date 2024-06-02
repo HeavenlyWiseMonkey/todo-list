@@ -5,18 +5,9 @@ import makeEditTaskDialog from './functions/makeEditTaskDialog';
 import home from './functions/home';
 import today from './functions/today';
 import week from './functions/week';
-
-// let newProjectName = prompt("What do you want to name your project?");
-
-// let newProject = new Project(newProjectName);
-
-// newProject.add(question());
-
-// display();
-
-// window.addEventListener('beforeunload', () => {
-//     addToLocalStorage(newProject);
-// });
+import projectDisplay from './functions/projectDisplay';
+import clearSelected from './functions/clearSelected';
+import {format} from 'date-fns'
 
 const homeElement = document.querySelector('.home');
 const todayElement = document.querySelector('.today');
@@ -37,15 +28,35 @@ weekElement.addEventListener('click', () => {
 
 const projectList = document.createElement('ul');
 
+makeAddTaskDialog();
+makeEditTaskDialog();
+makeAddTaskButton();
+
+const dueDateInputs = document.querySelectorAll('#dueDate');
+
 for (let i=0; i<localStorage.length; i++) {
-    const projectName = document.createElement('li');
-    projectName.classList.add('projectName');
-    projectName.textContent = localStorage.key(i);
-    projectList.appendChild(projectName);
+    const projectNameElement = document.createElement('li');
+    const projectName = localStorage.key(i);
+    projectNameElement.classList.add('projectName');
+    projectNameElement.textContent = projectName;
+    projectList.appendChild(projectNameElement);
+
+    projectNameElement.addEventListener('click', () => {
+        projectDisplay(projectName);
+        for (let i=0; i<dueDateInputs.length; i++) {
+            dueDateInputs[i].disabled = false;
+            dueDateInputs[i].max = '3024-01-01';
+        }
+        clearSelected();
+        projectNameElement.classList.add('selected');
+    });
 }
 
 projectsElement.appendChild(projectList);
 
-makeAddTaskDialog();
-makeEditTaskDialog();
-makeAddTaskButton();
+const currentStringDate = format(new Date(), 'yyyy-MM-dd');
+for (let i=0; i<dueDateInputs.length; i++) {
+    dueDateInputs[i].min = currentStringDate;
+}
+
+home();
