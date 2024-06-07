@@ -1,4 +1,5 @@
 import {format} from 'date-fns';
+import home from './home';
 
 function makeToDoBox(ToDo, index) {
     const ToDoList = document.querySelector('.ToDoList');
@@ -79,6 +80,13 @@ function deleteTask(currentProject, index) {
     let changedProject = JSON.parse(localStorage.getItem(currentProject));
     if (changedProject.length === 1) {
         localStorage.removeItem(currentProject);
+        const projectNameElements = document.querySelectorAll('.projectName');
+        for (let i=0; i<projectNameElements.length; i++) {
+            if (projectNameElements[i].textContent === currentProject) {
+                projectNameElements[i].remove();
+            }
+        }
+        home();
     }
     else {
         changedProject.splice(index, 1);

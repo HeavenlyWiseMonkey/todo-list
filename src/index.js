@@ -27,6 +27,7 @@ weekElement.addEventListener('click', () => {
 });
 
 const projectList = document.createElement('ul');
+projectList.classList.add('projectList');
 
 makeAddTaskDialog();
 makeEditTaskDialog();

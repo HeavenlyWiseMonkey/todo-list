@@ -1,5 +1,6 @@
 import {Project, addToLocalStorage, ToDo} from './toDoList';
 import makeToDoBox from './makeToDoBox';
+import makeSingleProjectNameElement from './makeSingleProjectNameElement';
 
 function makeAddTaskDialog() {
     const content = document.querySelector('.content');
@@ -111,6 +112,7 @@ function makeAddTaskDialog() {
             newProject.add(newToDo);
             addToLocalStorage(newProject);
             makeToDoBox(newToDo, 0);
+            makeSingleProjectNameElement(newToDo.project);
         }
     }
 }
