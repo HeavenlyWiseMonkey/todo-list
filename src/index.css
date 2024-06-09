@@ -43,7 +43,7 @@ ul {
 }
 
 li {
-    margin: 1rem 0;
+    margin: 1.5rem 0;
 }
 
 form {
@@ -77,4 +77,8 @@ dialog {
 form > div {
     display: grid;
     grid-template-columns: 1fr 2fr;
+}
+
+.home, .today, .week, .projects {
+    font-size: 1.8rem;
 }
