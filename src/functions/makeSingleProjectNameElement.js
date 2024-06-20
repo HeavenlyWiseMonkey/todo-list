@@ -2,6 +2,7 @@ import projectDisplay from './projectDisplay';
 import clearSelected from './clearSelected';
 
 function makeSingleProjectNameElement(project) {
+    console.log(project);
     const projectList = document.querySelector('.projectList');
     const projectNameElement = document.createElement('li');
     const dueDateInputs = document.querySelectorAll('#dueDate');
