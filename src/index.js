@@ -36,21 +36,29 @@ makeAddTaskButton();
 const dueDateInputs = document.querySelectorAll('#dueDate');
 
 for (let i=0; i<localStorage.length; i++) {
-    const projectNameElement = document.createElement('li');
-    const projectName = localStorage.key(i);
-    projectNameElement.classList.add('projectName');
-    projectNameElement.textContent = projectName;
-    projectList.appendChild(projectNameElement);
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    try {
+        if (project[0].title) {
+            const projectNameElement = document.createElement('li');
+            const projectName = localStorage.key(i);
+            projectNameElement.classList.add('projectName');
+            projectNameElement.textContent = projectName;
+            projectList.appendChild(projectNameElement);
 
-    projectNameElement.addEventListener('click', () => {
-        projectDisplay(projectName);
-        for (let i=0; i<dueDateInputs.length; i++) {
-            dueDateInputs[i].disabled = false;
-            dueDateInputs[i].max = '3024-01-01';
+            projectNameElement.addEventListener('click', () => {
+                projectDisplay(projectName);
+                for (let i=0; i<dueDateInputs.length; i++) {
+                    dueDateInputs[i].disabled = false;
+                    dueDateInputs[i].max = '3024-01-01';
+                }
+                clearSelected();
+                projectNameElement.classList.add('selected');
+            });
         }
-        clearSelected();
-        projectNameElement.classList.add('selected');
-    });
+    }
+    catch(error) {
+        console.log(error);
+    }
 }
 
 projectsElement.appendChild(projectList);
