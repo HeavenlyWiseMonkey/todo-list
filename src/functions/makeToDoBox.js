@@ -15,6 +15,7 @@ function makeToDoBox(ToDo, index) {
 
     titleElement.textContent = ToDo.title;
     descriptionElement.textContent = ToDo.description;
+    console.log(format(new Date(Number(dateData[0]), Number(dateData[1])-1, Number(dateData[2])), 'MM/dd/yyyy'));
     dueDateElement.textContent = format(new Date(Number(dateData[0]), Number(dateData[1])-1, Number(dateData[2])), 'MM/dd/yyyy');
     priorityElement.textContent = ToDo.priority;
     editElement.textContent = 'Edit';
